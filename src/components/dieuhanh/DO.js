@@ -161,7 +161,6 @@ class DOPage extends React.Component {
             <Row style={{marginTop: 10}}>
                 <b style={{fontSize: '0.6rem'}}>Điểm xuất phát:</b>
                 <CompleteInputPlace
-                  isSmall={true}
                   value={this.state.data.diemxuatphat}
                   option={this.state.diemxuatphat}
                   onChange={(value) => {
@@ -219,7 +218,6 @@ class DOPage extends React.Component {
             <Row style={{marginTop: 10}}>
               <b style={{fontSize: '0.6rem'}}>Điểm trả hàng: </b>
               <CompleteInputPlace
-                isSmall={true}
                 value={this.state.data.diemtrahang}
                 option={this.state.diemtrahang}
                 onChange={(value) => {

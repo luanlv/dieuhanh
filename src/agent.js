@@ -3,9 +3,9 @@ import _superagent from 'superagent';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-// const API_ROOT = 'http://localhost:8000';
+const API_ROOT = 'http://localhost:8000';
 // const API_ROOT = 'http://192.168.1.108:8000';
-const API_ROOT = 'http://api.colombus.vn';
+// const API_ROOT = 'http://api.colombus.vn';
 
 const encode = encodeURIComponent;
 const responseBody = res => res.body;
@@ -164,6 +164,8 @@ const DieuHanh = {
     requests.get('/dieuhanh/users/danhsachthauphu'),
   themThauPhu: data =>
     requests.post('/dieuhanh/users/themthauphu', {data}),
+  danhsachxe: () =>
+    requests.get('/dieuhanh/xe/danhsachxe'),
 }
 
 const ThauPhu = {

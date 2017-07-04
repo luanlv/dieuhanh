@@ -70,7 +70,7 @@ class DOPage extends React.Component {
           )}
           {this.state.init && (
             <div className="it">
-              <h2 style={{textAlign: 'center', fontSize: '1.2rem'}}>Thêm Auto Fill</h2>
+              <h2 style={{textAlign: 'center', fontSize: '1.2rem'}}>Thêm các trường tự động</h2>
               <ThemAutoFillPeople
                 title="Khách hàng"
                 fieldName="khachhang"

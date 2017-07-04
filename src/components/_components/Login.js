@@ -37,7 +37,7 @@ class Component extends React.Component {
     super();
     this.state={
       selectedIndex: 0,
-      type: 'laixe',
+      type: 'dieuhanh',
       username: ' ',
       password: '',
     }
