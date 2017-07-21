@@ -159,10 +159,41 @@ class DOPage extends React.Component {
                 />
             </Row>
             <Row style={{marginTop: 10}}>
-                <b style={{fontSize: '0.6rem'}}>Điểm xuất phát:</b>
+              <b style={{fontSize: '0.6rem'}}>Điểm xuất phát:</b>
+              <br/>
+              <CustomSelect
+                value={this.state.data.tinhxuatphat}
+                handleChange={value => {
+                  this.setState(prev => {
+                    return {
+                      ...prev,
+                      data: {
+                        ...prev.data,
+                        tinhxuatphat: value
+                      }
+                    }
+                  })
+                }}
+                selectOption={(value) => {
+                  let tmp = codeByValue(this.state.data.diemxuatphat, this.state.diemxuatphat)
+                  if(tmp !== undefined && tmp !== value){
+                    this.setState(prev => {
+                      return {
+                        ...prev,
+                        data: {
+                          ...prev.data,
+                          diemxuatphat: ''
+                        }
+                      }
+                    })
+                  }
+                }}
+              />
                 <CompleteInputPlace
+                  isSmall={true}
                   value={this.state.data.diemxuatphat}
                   option={this.state.diemxuatphat}
+                  tinhthanh={this.state.data.tinhxuatphat || ''}
                   onChange={(value) => {
                     this.setState(prev => {
                       return {
@@ -186,40 +217,14 @@ class DOPage extends React.Component {
                     })
                   }}
                 />
-                <CustomSelect
-                  value={this.state.data.tinhxuatphat}
-                  handleChange={value => {
-                    this.setState(prev => {
-                      return {
-                        ...prev,
-                        data: {
-                          ...prev.data,
-                          tinhxuatphat: value
-                        }
-                      }
-                    })
-                  }}
-                  selectOption={(value) => {
-                    let tmp = codeByValue(this.state.data.diemxuatphat, this.state.diemxuatphat)
-                    if(tmp !== undefined && tmp !== value){
-                      this.setState(prev => {
-                        return {
-                          ...prev,
-                          data: {
-                            ...prev.data,
-                            diemxuatphat: ''
-                          }
-                        }
-                      })
-                    }
-                  }}
-                />
+               
             </Row>
             <Row style={{marginTop: 10}}>
               <b style={{fontSize: '0.6rem'}}>Điểm trả hàng: </b>
               <CompleteInputPlace
                 value={this.state.data.diemtrahang}
                 option={this.state.diemtrahang}
+                tinhthanh={this.state.data.tinhxuatphat || ''}
                 onChange={(value) => {
                   this.setState(prev => {
                     return {

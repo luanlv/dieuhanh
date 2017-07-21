@@ -26,7 +26,7 @@ class CompleteInput extends React.Component {
 
   render() {
     const { dataSource } = this.state;
-    console.log(this.props.defaultValue)
+    // console.log(this.props.defaultValue)
     return (
       <AutoComplete
         dataSource={dataSource}

@@ -14,8 +14,9 @@ class CompleteInput extends React.Component {
   }
 
   handleSearch = (value) => {
+
     let newOption = this.state.option.filter(option => {
-      return slugify(option.value.toLowerCase() + ' ' + option.code.toLowerCase()).indexOf(slugify(value.toLowerCase())) >= 0
+      return option.code === this.props.tinhthanh && slugify(option.value.toLowerCase() + ' ' + option.code.toLowerCase()).indexOf(slugify(value.toLowerCase())) >= 0
     })
 
     this.setState({
@@ -32,7 +33,7 @@ class CompleteInput extends React.Component {
         style={{ width: this.props.isSmall ? "65%" : "100%" }}
         value={this.props.value}
         onChange={(value) => {this.props.onChange(value)}}
-        onSelect={(value) => {if(this.props.selectOption) this.props.selectOption(value)}}
+        // onSelect={(value) => {if(this.props.selectOption) this.props.selectOption(value)}}
         onSearch={this.handleSearch}
       />
     );
