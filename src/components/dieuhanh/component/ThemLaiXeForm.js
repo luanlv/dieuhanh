@@ -12,10 +12,10 @@ class NormalLoginForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         values.xe = XeByBKS(values.bks, this.props.xe)
-        agent.IT.themLaiXe(values)
+        agent.DieuHanh.themLaiXe(values)
           .then(res => {
             message.success('Them thanh cong')
-            this.context.router.replace('/it');
+            this.context.router.replace('/dieuhanh');
           })
           .catch(err => {
             message.error('Them that bai')
@@ -46,6 +46,8 @@ class NormalLoginForm extends React.Component {
               />
             )}
           </FormItem>
+          
+          
 
           <FormItem>
             {getFieldDecorator('password', {

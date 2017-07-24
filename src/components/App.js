@@ -160,14 +160,14 @@ class MenuExample extends React.Component {
       <div className={show ? 'menu-active' : ''}>
         <div>
           <NavBar
-            leftContent={<Link style={{color: 'white'}} to="/"><span style={{cursor: 'pointer'}}><Icon style={{fontSize: '1.2rem'}} type="bars" /></span></Link>}
+            leftContent={<Link style={{color: 'white'}} to="/"><span style={{cursor: 'pointer'}}><Icon style={{fontSize: '2rem'}} type="bars" /></span></Link>}
             mode="dark"
             // onLeftClick={this.handleClick}
             className="top-nav-bar"
             rightContent={(
               <div style={{color: 'white', cursor: 'pointer'}}
                    onClick={this.props.onClickLogout}>
-                <Icon style={{fontSize: '1rem'}} type="logout" />
+                <Icon style={{fontSize: '2rem'}} type="logout" />
               </div>
             )}
             style={{position: 'fixed', top: 0, left: 0, width: '100%'}}

@@ -80,16 +80,10 @@ class ListDO extends React.Component {
       <div className="home-page" style={{marginTop: '1rem'}}>
         <Row className="laixe-listDO-Wr" style={{paddingTop: '0.3rem', paddingBottom: '1rem'}}>
           <h2 className="textCenter" style={{fontSize: '0.8rem', paddingBottom: '0.3rem'}}>Danh sách chờ duyệt</h2>
-          <div
-            className="updateButton"
-          >
-            <Button type="primary"
-              onClick={() => {this.init()}}
-            >Cập nhập</Button>
-          </div>
           {this.state.init && (
               <div>
                   {this.state.listDO.map((el, index) => {
+                    console.log(el)
                     return (
                         <Item
                           extra={<div>
@@ -141,8 +135,7 @@ class ListDO extends React.Component {
                             <b style={{color: '#FEC713'}}>{moment(el.time).format('DD/MM/YYYY')}</b> |
                             <b style={{}}> {el.khachhang}</b>
                           </Brief>
-                          <Brief><b style={{color: '#FE6A14'}}>{el.sodiem} điểm</b> | {el.diemxuatphat} -> {el.diemtrahang}</Brief>
-                          <Brief><b style={{color: 'blue'}}>{el.laixe[0].name}</b></Brief>
+                          {/*<Brief><b style={{color: 'blue'}}>{el.laixe[0].name}</b></Brief>*/}
                           {el.tienthu > 0 && <Brief>Thu hộ: <b style={{color: '#FE6A14'}}>{el.tienthu.toLocaleString()} đ</b></Brief>}
                           {el.tienphatsinh > 0 && <Brief>Phí phát sinh: <b style={{color: '#FE6A14'}}>{el.tienphatsinh.toLocaleString()} đ</b></Brief>}
                           <Brief><Link to={"/dieuhanh/do/" + el._id}><ButtonWeb>Xem chi tiết</ButtonWeb></Link></Brief>

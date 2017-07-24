@@ -40,22 +40,22 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home-page" style={{marginTop: '1rem'}}>
-        <div style={{padding: '0.3em'}}>
+        <div style={{padding: '0.3em', maxWidth: '800px', margin: '0 auto'}}>
           <Link to="/dieuhanh/do">
-            <Button size={"large"} className="btn" type="primary" style={{width: '100%', height: '2rem', fontSize: '1rem'}}>Lệnh điều xe</Button>
+            <Button size={"large"} className="btn" type="primary" style={{width: '100%', height: '3rem', fontSize: '1rem'}}>Lệnh điều xe</Button>
           </Link>
 
           <Link to="/dieuhanh/phuphi">
-            <Button size={"large"} className="btn" type="primary" style={{width: '100%', marginTop: '0.3rem', height: '2rem', fontSize: '1rem'}}>Phụ phí</Button>
+            <Button size={"large"} className="btn" type="primary" style={{width: '100%', marginTop: '0.3rem', height: '3rem', fontSize: '1rem'}}>Phụ phí</Button>
           </Link>
           <Link to="/dieuhanh/themlaixe">
-            <Button size={"large"} className="btn" type="primary" style={{width: '100%', marginTop: '0.3rem', height: '2rem', fontSize: '1rem'}}>Thêm lái xe</Button>
+            <Button size={"large"} className="btn" type="primary" style={{width: '100%', marginTop: '0.3rem', height: '3rem', fontSize: '1rem'}}>Thêm lái xe</Button>
           </Link>
           <Link to="/dieuhanh/themxe">
-            <Button size={"large"} className="btn" type="primary" style={{width: '100%', marginTop: '0.3rem', height: '2rem', fontSize: '1rem'}}>Thêm xe</Button>
+            <Button size={"large"} className="btn" type="primary" style={{width: '100%', marginTop: '0.3rem', height: '3rem', fontSize: '1rem'}}>Thêm xe</Button>
           </Link>
           <Link to="/dieuhanh/themthongtin">
-            <Button size={"large"} className="btn" type="primary" style={{width: '100%', marginTop: '0.3rem', height: '2rem', fontSize: '1rem'}}>Thêm thông tin</Button>
+            <Button size={"large"} className="btn" type="primary" style={{width: '100%', marginTop: '0.3rem', height: '3rem', fontSize: '1rem'}}>Thêm thông tin</Button>
           </Link>
         </div>
       </div>

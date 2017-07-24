@@ -16,6 +16,7 @@ import { connect } from 'react-redux';
 import { List, InputItem } from 'antd-mobile';
 import { createForm } from 'rc-form'
 
+
 import {
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
@@ -85,64 +86,85 @@ class DOPage extends React.Component {
       .then(res => {
         that.setState(prev => {return {
           ...prev,
-          init: true,
           khachhang: valueByField('khachhang', res),
-          diemxuatphat: valueByField('diadiem', res),
+          // diemxuatphat: valueByField('diadiem', res),
           diemtrahang: valueByField('diadiem', res),
           nguoiyeucau: valueByField('nguoiyeucau', res),
         }})
-      })
+        agent.DieuHanh.autofillPlace()
+          .then(res => {
+            that.setState(prev => {return {
+              ...prev,
+              init: true,
+              diemxuatphat:  res
+            }})
+          })
+    })
   }
 
   componentWillUnmount() {
     this.props.onUnload();
   }
+  
+  changeKhachhang(value) {
+    this.setState(prev => {
+      return {
+        ...prev,
+        data: {
+          ...prev.data,
+          khachhang: value
+        }
+      }
+    })
+  }
+
+  changeLaiXe(value) {
+    console.log(value)
+    this.setState(prev => {
+      return {
+        ...prev,
+        data: {
+          ...prev.data,
+          laixe: parseInt(value)
+        }
+      }
+    })
+  }
+
 
   render() {
     let gThis = this
+  
+    const diadiem = [];
+    this.state.diemxuatphat.map((el,key) => {
+      diadiem.push(<Option key={key}>{el.name + ' - ' + el.code + ' | ' + el.tinh.name}</Option>);
+    })
+    
+  
+    
     return (
       <div className="home-page" style={{marginTop: '0.5rem'}}>
-        <div style={{padding: '0.2em'}}>
-          <h2 style={{textAlign: 'center', fontSize: '1rem'}}>Lệnh điều động xe</h2>
+        <div style={{padding: '0.5em'}}>
+          <h2 style={{textAlign: 'center', fontSize: '2rem'}}>Lệnh điều động xe</h2>
           {this.state.init && <div>
             <Row>
-              <b style={{fontSize: '0.6rem'}}>Lái xe:</b>
+              <b style={{fontSize: '1.2rem'}}>Lái xe:</b>
               <SelectLaiXe
                 option={this.state.laixe}
-                handleChange={value => {
-                  this.setState(prev => {
-                    return {
-                      ...prev,
-                      data: {
-                        ...prev.data,
-                        laixe: parseInt(value)
-                      }
-                    }
-                  })
-                }}
+                handleChange={this.changeLaiXe.bind(this)}
               />
             </Row>
             
             
             <Row>
-                <b style={{fontSize: '0.6rem'}}>Khách hàng:</b>
+                <b style={{fontSize: '1.2rem'}}>Khách hàng:</b>
                 <CompleteInput
                   option={this.state.khachhang}
-                  onChange={(value) => {
-                    this.setState(prev => {
-                      return {
-                        ...prev,
-                        data: {
-                          ...prev.data,
-                          khachhang: value
-                        }
-                      }
-                    })
-                  }}
+                  onChange={this.changeKhachhang.bind(this)}
                 />
             </Row>
             <Row>
-                <b style={{fontSize: '0.6rem'}}>Người yêu cầu:</b>
+                <b style={{fontSize: '1.2rem'}}>Người yêu cầu:</b>
                 <CompleteInput
                   option={this.state.nguoiyeucau}
                   onChange={(value) => {
@@ -159,130 +181,77 @@ class DOPage extends React.Component {
                 />
             </Row>
             <Row style={{marginTop: 10}}>
-              <b style={{fontSize: '0.6rem'}}>Điểm xuất phát:</b>
+              <b style={{fontSize: '1.2rem'}}>Điểm xuất phát:</b>
               <br/>
-              <CustomSelect
-                value={this.state.data.tinhxuatphat}
-                handleChange={value => {
-                  this.setState(prev => {
-                    return {
-                      ...prev,
-                      data: {
-                        ...prev.data,
-                        tinhxuatphat: value
-                      }
-                    }
-                  })
-                }}
-                selectOption={(value) => {
-                  let tmp = codeByValue(this.state.data.diemxuatphat, this.state.diemxuatphat)
-                  if(tmp !== undefined && tmp !== value){
-                    this.setState(prev => {
-                      return {
-                        ...prev,
-                        data: {
-                          ...prev.data,
-                          diemxuatphat: ''
-                        }
-                      }
-                    })
-                  }
-                }}
-              />
-                <CompleteInputPlace
-                  isSmall={true}
-                  value={this.state.data.diemxuatphat}
-                  option={this.state.diemxuatphat}
-                  tinhthanh={this.state.data.tinhxuatphat || ''}
-                  onChange={(value) => {
-                    this.setState(prev => {
-                      return {
-                        ...prev,
-                        data: {
-                          ...prev.data,
-                          diemxuatphat: value
-                        }
-                      }
-                    })
-                  }}
-                  selectOption={(value) => {
-                    this.setState(prev => {
-                      return {
-                        ...prev,
-                        data: {
-                          ...prev.data,
-                          tinhxuatphat: codeByValue(value, this.state.diemxuatphat)
-                        }
-                      }
-                    })
-                  }}
-                />
-               
-            </Row>
-            <Row style={{marginTop: 10}}>
-              <b style={{fontSize: '0.6rem'}}>Điểm trả hàng: </b>
-              <CompleteInputPlace
-                value={this.state.data.diemtrahang}
-                option={this.state.diemtrahang}
-                tinhthanh={this.state.data.tinhxuatphat || ''}
+  
+              <Select
+                // mode="multiple"
+                style={{ width: '100%' }}
+                placeholder="Chọn địa điểm"
+                filterOption={(input, option) => slugify(option.props.children).indexOf(slugify(input.toLowerCase())) >= 0}
+                // defaultValue={['a10', 'c12']}
                 onChange={(value) => {
                   this.setState(prev => {
                     return {
                       ...prev,
                       data: {
                         ...prev.data,
-                        diemtrahang: value
+                        iddiemxuatphat: value
                       }
                     }
                   })
                 }}
-                selectOption={(value) => {
+              >
+                {diadiem}
+              </Select>
+               
+            </Row>
+            <Row style={{marginTop: 10}}>
+              <b style={{fontSize: '1.2rem'}}>Điểm trả hàng: </b>
+              
+              {/*<CompleteInputPlace*/}
+                {/*value={this.state.data.diemtrahang}*/}
+                {/*option={this.state.diemtrahang}*/}
+                {/*tinhthanh={this.state.data.tinhxuatphat || ''}*/}
+                {/*onChange={(value) => {*/}
+                  {/*this.setState(prev => {*/}
+                    {/*return {*/}
+                      {/*...prev,*/}
+                      {/*data: {*/}
+                        {/*...prev.data,*/}
+                        {/*diemtrahang: value*/}
+                      {/*}*/}
+                    {/*}*/}
+                  {/*})*/}
+                {/*}}*/}
+              {/*/>*/}
+              
+              <Select
+                mode="multiple"
+                style={{ width: '100%' }}
+                placeholder="Chọn địa điểm"
+                filterOption={(input, option) => slugify(option.props.children).indexOf(slugify(input.toLowerCase())) >= 0}
+                // defaultValue={['a10', 'c12']}
+                onChange={(value) => {
                   this.setState(prev => {
                     return {
                       ...prev,
                       data: {
                         ...prev.data,
-                        tinhtrahang: codeByValue(value, this.state.diemtrahang)
-                      }
-                    }
-                  })
-                  
-                  }
-                }
-              />
-              <CustomSelect
-                value={this.state.data.tinhtrahang}
-                handleChange={value => {
-                  this.setState(prev => {
-                    return {
-                      ...prev,
-                      data: {
-                        ...prev.data,
-                        tinhtrahang: value
+                        iddiemtrahang: value
                       }
                     }
                   })
                 }}
-                selectOption={(value) => {
-                  let tmp = codeByValue(this.state.data.diemtrahang, this.state.diemtrahang)
-                  if(tmp !== undefined && tmp !== value){
-                    this.setState(prev => {
-                      return {
-                        ...prev,
-                        data: {
-                          ...prev.data,
-                          diemtrahang: ''
-                        }
-                      }
-                    })
-                  }
-                }}
-              />
+              >
+                {diadiem}
+              </Select>
+              
             </Row>
             <Row style={{marginTop: 10}}>
 
               <Col span={12}>
-                <b style={{fontSize: '0.6rem'}}>Trọng tải (tấn):</b>
+                <b style={{fontSize: '1.2rem'}}>Trọng tải (tấn):</b>
                 <InputNumber style={{width: '100%'}} size="large"
                              value={this.state.data.trongtai}
                              min={1} max={100}
@@ -312,40 +281,38 @@ class DOPage extends React.Component {
                 />
               </Col>
 
+              {/*<Col span={12}>*/}
+                {/*<b style={{fontSize: '1.2rem'}}>Số điểm: </b>*/}
+                {/*<InputNumber style={{width: '100%'}} size="large"*/}
+                             {/*value={this.state.data.sodiem}*/}
+                             {/*min={1} max={100}*/}
+                             {/*onChange={(value) => {*/}
+                               {/*if(!isNaN(parseInt(value)) || value === '') {*/}
+                                 {/*this.setState(prev => {*/}
+                                   {/*return {*/}
+                                     {/*...prev,*/}
+                                     {/*data: {*/}
+                                       {/*...prev.data,*/}
+                                       {/*sodiem: value*/}
+                                     {/*}*/}
+                                   {/*}*/}
+                                 {/*})*/}
+                               {/*} else {*/}
+                                 {/*this.setState(prev => {*/}
+                                   {/*return {*/}
+                                     {/*...prev,*/}
+                                     {/*data: {*/}
+                                       {/*...prev.data,*/}
+                                       {/*sodiem: 1*/}
+                                     {/*}*/}
+                                   {/*}*/}
+                                 {/*})*/}
+                               {/*}*/}
+                             {/*}}*/}
+                {/*/>*/}
+              {/*</Col>*/}
               <Col span={12}>
-                <b style={{fontSize: '0.6rem'}}>Số điểm: </b>
-                <InputNumber style={{width: '100%'}} size="large"
-                             value={this.state.data.sodiem}
-                             min={1} max={100}
-                             onChange={(value) => {
-                               if(!isNaN(parseInt(value)) || value === '') {
-                                 this.setState(prev => {
-                                   return {
-                                     ...prev,
-                                     data: {
-                                       ...prev.data,
-                                       sodiem: value
-                                     }
-                                   }
-                                 })
-                               } else {
-                                 this.setState(prev => {
-                                   return {
-                                     ...prev,
-                                     data: {
-                                       ...prev.data,
-                                       sodiem: 1
-                                     }
-                                   }
-                                 })
-                               }
-                             }}
-                />
-              </Col>
-            </Row>
-            <Row style={{marginTop: 10}}>
-              <Col span={12}>
-                <b style={{fontSize: '0.6rem'}}> KM: </b>
+                <b style={{fontSize: '1.2rem'}}> KM: </b>
                 <InputNumber style={{width: '100%'}} size="large" min={1} max={1000}
                              value={this.state.data.sokm}
                              onChange={(value) => {
@@ -373,7 +340,6 @@ class DOPage extends React.Component {
                              }}
                 />
               </Col>
-              
             </Row>
   
             <Row style={{marginTop: 10}}>
@@ -381,7 +347,7 @@ class DOPage extends React.Component {
             
             {/*<Row style={{marginTop: 10}}>*/}
             
-              {/*<b style={{fontSize: '0.6rem'}}>Tiền phát sinh:</b>*/}
+              {/*<b style={{fontSize: '1.2rem'}}>Tiền phát sinh:</b>*/}
               {/**/}
               {/*<Switch  defaultChecked={false} onChange={(value) => {*/}
               {/*this.setState(prev => { return {*/}
@@ -437,7 +403,17 @@ class DOPage extends React.Component {
                       style={{height: '2rem', width: "100%", fontSize: '1.2rem'}}
                       onClick={() => {
                         if(check(gThis.state.data)) {
-                          agent.DieuHanh.themDO(gThis.state.data)
+                          let diemxuatphat = gThis.state.diemxuatphat[gThis.state.data.iddiemxuatphat]
+                          let diemtrahang = []
+                          gThis.state.data.iddiemtrahang.map(index => {
+                            diemtrahang.push(gThis.state.diemxuatphat[index])
+                          })
+                          let data = gThis.state.data
+                          data.diemtrahang = diemtrahang
+                          data.diemxuatphat = diemxuatphat
+                          
+                          // console.log(gThis.state.data)
+                          agent.DieuHanh.themDO(data)
                             .then(res => {
                               message.success("Thêm mới thành công")
                               this.context.router.replace('/dieuhanh');
@@ -502,30 +478,35 @@ function check(data){
     message.error("Người yêu cầu không được để trống")
     return false
   }
-  if(data.diemxuatphat=== undefined || data.diemxuatphat.trim().length < 1){
+  if(data.iddiemxuatphat=== undefined || data.iddiemxuatphat.length < 1){
     message.error("Điểm xuất phát không được để trống")
     return false
   }
-  if(data.tinhxuatphat === undefined || data.tinhxuatphat.trim().length < 1){
-    message.error("Tỉnh xuất phát không được để trống")
-    return false
-  }
-  if(data.diemtrahang === undefined ||  data.diemtrahang.trim().length < 1){
+  
+  // if(data.tinhxuatphat === undefined || data.tinhxuatphat.trim().length < 1){
+  //   message.error("Tỉnh xuất phát không được để trống")
+  //   return false
+  // }
+  
+  if(data.iddiemtrahang === undefined ||  data.iddiemtrahang.length < 1){
     message.error("Điểm trả hàng không được để trống")
     return false
   }
-  if(data.tinhtrahang === undefined || data.tinhtrahang.trim().length < 1){
-    message.error("Tỉnh trả hàng không được để trống")
-    return false
-  }
+  
+  // if(data.tinhtrahang === undefined || data.tinhtrahang.trim().length < 1){
+  //   message.error("Tỉnh trả hàng không được để trống")
+  //   return false
+  // }
+  
   if(data.trongtai === undefined || data.trongtai < 1){
     message.error("Trọng tải không được để trống")
     return false
   }
-  if(data.sodiem === undefined || data.sodiem < 1){
-    message.error("Số điểm trả hàng không được để trống")
-    return false
-  }
+  
+  // if(data.sodiem === undefined || data.sodiem < 1){
+  //   message.error("Số điểm trả hàng không được để trống")
+  //   return false
+  // }
   if(data.sokm === undefined || data.sokm < 1){
     message.error("Số KM đi được không được để trống")
     return false

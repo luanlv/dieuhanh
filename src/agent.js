@@ -3,9 +3,9 @@ import _superagent from 'superagent';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = 'http://localhost:8000';
+// const API_ROOT = 'http://localhost:8000';
 // const API_ROOT = 'http://192.168.1.108:8000';
-// const API_ROOT = 'http://api.colombus.vn';
+const API_ROOT = 'http://api.colombus.vn';
 
 const encode = encodeURIComponent;
 const responseBody = res => res.body;
@@ -145,6 +145,8 @@ const DieuHanh = {
     requests.get(`/dieuhanh/do/get/${id}`),
   autofill: () =>
     requests.get(`/dieuhanh/autofill/all`),
+  autofillPlace: () =>
+    requests.get(`/dieuhanh/autofill/allPlace`),
   capnhapDO: data =>
     requests.post('/dieuhanh/do/capnhap', {data}),
   listPhuPhi: () =>
@@ -159,6 +161,8 @@ const DieuHanh = {
     requests.post('/dieuhanh/do/them', {data}),
   themAutoFill: (data) =>
     requests.post(`/dieuhanh/autofill/new`, data),
+  themDiaDiem: (data) =>
+    requests.post(`/dieuhanh/autofill/newPlace`, data),
 
   danhsachThauPhu: () =>
     requests.get('/dieuhanh/users/danhsachthauphu'),
@@ -166,6 +170,10 @@ const DieuHanh = {
     requests.post('/dieuhanh/users/themthauphu', {data}),
   danhsachxe: () =>
     requests.get('/dieuhanh/xe/danhsachxe'),
+  themLaiXe: data =>
+    requests.post('/dieuhanh/users/themlaixe', {data}),
+  themXe: data =>
+    requests.post('/dieuhanh/xe/them', {data}),
 }
 
 const ThauPhu = {

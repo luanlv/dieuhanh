@@ -1,6 +1,6 @@
 html, body {
     background: white;
-    font-size: 32px !important;
+    font-size: 16px !important;
 }
 
 #logo {
@@ -11,20 +11,26 @@ html, body {
     top: 17px;
 }
 
+.home-page {
+    max-width: 1200px !important;
+    margin: 0 auto;
+    padding: 10px !important;
+}
+
 .ant-row b, .ant-row  {
-    line-height: 0.6rem !important;
+    /*line-height: 0.6rem !important;*/
 }
 
 .ant-row input {
-    height: 1rem !important;
-    font-size: 0.6rem !important;
+    /*height: 1rem !important;*/
+    /*font-size: 0.6rem !important;*/
 }
 
-.error-messages {
-    text-align: center;
-    width: 100%;
-    color: red;
-}
+/*.error-messages {*/
+    /*text-align: center;*/
+    /*width: 100%;*/
+    /*color: red;*/
+/*}*/
 
 .ant-modal .bks {
     color: red;
@@ -33,14 +39,14 @@ html, body {
 }
 
 .ant-modal .ant-input-number-input-wrap, .ant-modal .ant-input-number {
-    height: 1.2rem !important;
+    /*height: 1.2rem !important;*/
 }
 
 
 .ant-modal .ant-input-number-input {
-    height: 1.2rem !important;
-    font-size: 0.9rem !important;
-    line-height: 1.2rem !important;
+    /*height: 1.2rem !important;*/
+    /*font-size: 0.9rem !important;*/
+    /*line-height: 1.2rem !important;*/
 }
 
 .ant-modal .ant-modal-close-x {
@@ -55,10 +61,10 @@ html, body {
 }
 
 .chonxe .ant-input {
-    width: 5rem !important;
-    height: 1.2rem !important;
-    line-height: 1.2rem !important;
-    font-size: 0.9rem !important;
+    /*width: 5rem !important;*/
+    /*height: 1.2rem !important;*/
+    /*line-height: 1.2rem !important;*/
+    /*font-size: 0.9rem !important;*/
 }
 .ant-modal .ant-modal-body {
     padding-top: 1rem !important;
@@ -92,15 +98,15 @@ html, body {
 }
 
 .updateButton {
-    width: 6rem;
+    /*width: 6rem;*/
     position: fixed;
-    right: 10px;
-    bottom: 10px;
+    right: 30px;
+    bottom: 30px;
     z-index: 103;
 }
 
 .ant-message .ant-message-custom-content,.ant-message i  {
-    font-size: 0.4rem !important;
+    font-size: 1.2rem !important;
 }
 
 .am-list-line:nth-child(1) {
@@ -115,9 +121,9 @@ html, body {
 }
 
 .ant-select-selection, .ant-form-item-control, .it .ant-btn  {
-    height: 1rem !important;
-    line-height: 1rem !important;
-    font-size: 0.6rem !important;
+    /*height: 1rem !important;*/
+    /*line-height: 1rem !important;*/
+    /*font-size: 0.6rem !important;*/
 }
 
 .ant-input-number-input-wrap {
@@ -125,8 +131,8 @@ html, body {
 }
 
 .ant-select-selection__rendered, .ant-select-search, .it .ant-btn, .it .ant-input {
-    line-height: 1rem !important;
-    font-size: 0.4rem !important;
+    /*line-height: 1rem !important;*/
+    /*font-size: 0.4rem !important;*/
 }
 
 .ant-switch {
@@ -134,19 +140,19 @@ html, body {
 }
 
 textarea.ant-input {
-    line-height: 0.8rem !important;
-    font-size: 0.6rem !important;
+    /*line-height: 0.8rem !important;*/
+    /*font-size: 0.6rem !important;*/
 }
 
 .ant-select-selection__rendered {
-    font-size: 0.6em !important;
+    /*font-size: 0.6em !important;*/
 }
 
 
 .ant-select-dropdown-menu li {
-    height: 1rem !important;
-    line-height: 1rem !important;
-    font-size: 0.4rem !important;
+    /*height: 1rem !important;*/
+    /*line-height: 1rem !important;*/
+    /*font-size: 0.4rem !important;*/
 }
 
 
@@ -155,12 +161,12 @@ textarea.ant-input {
 }
 
 .am-input-control input {
-    height: 2em !important;
-    font-size: 1.5em !important;
+    /*height: 2em !important;*/
+    /*font-size: 1.5em !important;*/
 }
 
 .am-input-label{
-    font-size: 0.3em !important;
+    /*font-size: 0.3em !important;*/
 }
 
 .foo-menu {
@@ -169,7 +175,7 @@ textarea.ant-input {
 }
 .top-nav-bar {
     position: relative;
-    height: 1.5em !important;
+    height: 3em !important;
     z-index: 1000 !important;
     background-color: #008AE6;
     color: #FFF;
@@ -235,7 +241,7 @@ textarea.ant-input {
     font-style: italic;
     color: cadetblue;
     margin-bottom: 10px;
-    font-size: 0.3rem
+    font-size: 1rem
 }
 
 .mt5 { margin-top: 5px  }
@@ -1054,4 +1060,10 @@ textarea.ant-input {
     left: calc(50% - 1.8rem) !important;
     margin-top: 0.5rem !important;
     color: black !important;
+}
+
+
+.auth-page {
+    max-width: 500px;
+    margin: 0 auto;
 }

@@ -46,14 +46,14 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home-page" style={{marginTop: '1rem'}}>
-        <div style={{padding: '0.3em'}}>
+        <div style={{padding: '0.3em', maxWidth: '800px', margin: '0 auto'}}>
           
           <Link to="/dieuhanh/themdo">
-            <Button size={"large"} className="btn" type="primary" style={{backgroundColor: 'grey !important' ,width: '100%', height: '2rem', fontSize: '1rem'}}>Thêm lệnh mới</Button>
+            <Button size={"large"} className="btn" type="primary" style={{backgroundColor: 'grey !important' ,width: '100%', height: '3rem', fontSize: '1rem'}}>Thêm lệnh mới</Button>
           </Link>
         
           <Link to="/dieuhanh/danhsachdo">
-            <Button size={"large"} className="btn" type="primary" style={{width: '100%', marginTop: '0.3rem', height: '2rem', fontSize: '1rem'}}>Danh sách</Button>
+            <Button size={"large"} className="btn" type="primary" style={{width: '100%', marginTop: '0.3rem', height: '3rem', fontSize: '1rem'}}>Danh sách</Button>
           </Link>
           
         </div>

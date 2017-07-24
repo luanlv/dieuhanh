@@ -12,6 +12,7 @@ class CustomSelect extends React.Component {
         value={this.props.value}
         optionFilterProp="children"
         placeholder="Tỉnh thành"
+        labelInValue={true}
         onChange={this.props.handleChange}
         onSelect={this.props.selectOption}
         filterOption={(input, option) => slugify(option.props.children.toLowerCase()).indexOf(slugify(input.toLowerCase())) >= 0}

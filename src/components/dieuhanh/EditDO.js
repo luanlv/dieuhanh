@@ -74,19 +74,42 @@ class DOPage extends React.Component {
           edit: !DO.trangthai.daduyet,
           data: DO
         }})
-  
-        agent.DieuHanh.autofill()
+        
+        agent.DieuHanh.danhsachlaixe()
           .then(res => {
             that.setState(prev => {return {
               ...prev,
-              init: true,
-              khachhang: valueByField('khachhang', res),
-              diemxuatphat: valueByField('diadiem', res),
-              diemtrahang: valueByField('diadiem', res),
-              nguoiyeucau: valueByField('nguoiyeucau', res),
-              doixe: true,
-              phatsinh: true,
+              laixe: res
             }})
+          })
+        agent.DieuHanh.autofill()
+          .then(res1 => {
+            that.setState(prev => {return {
+              ...prev,
+              khachhang: valueByField('khachhang', res1),
+              // diemxuatphat: valueByField('diadiem', res),
+              diemtrahang: valueByField('diadiem', res1),
+              nguoiyeucau: valueByField('nguoiyeucau', res1),
+            }})
+            agent.DieuHanh.autofillPlace()
+              .then(res2 => {
+                let iddiemxuatphat = getIndexPlace(res.diemxuatphat, res2)
+                let iddiemtrahang = []
+                res.diemtrahang.map((el, index) => {
+                  iddiemtrahang.push(getIndexPlace(res.diemtrahang[index] ,res2))
+                })
+                console.log(iddiemtrahang)
+                that.setState(prev => {return {
+                  ...prev,
+                  init: true,
+                  diemxuatphat:  res2,
+                  data: {
+                    ...prev.data,
+                    iddiemxuatphat: iddiemxuatphat,
+                    iddiemtrahang: iddiemtrahang
+                  }
+                }})
+              })
           })
         
       })
@@ -101,6 +124,11 @@ class DOPage extends React.Component {
 
   render() {
     let gThis = this
+  
+    const diadiem = [];
+    this.state.diemxuatphat.map((el,key) => {
+      diadiem.push(<Option key={key}>{el.name + ' - ' + el.code + ' | ' + el.tinh.name}</Option>);
+    })
     if(!this.state.init){
       return (
         <div className="do-page">
@@ -204,122 +232,55 @@ class DOPage extends React.Component {
             <Row style={{marginTop: 10}}>
               <b style={{fontSize: '0.6rem'}}>Điểm xuất phát: </b>
               <br/>
-              <CompleteInputPlace
-                isSmall={true}
-                value={this.state.data.diemxuatphat}
-                option={this.state.diemxuatphat}
+              
+              <Select
+                // mode="multiple"
+                style={{ width: '100%' }}
+                placeholder="Chọn địa điểm"
+                filterOption={(input, option) => slugify(option.props.children).indexOf(slugify(input.toLowerCase())) >= 0}
+                // defaultValue={['a10', 'c12']}
+                defaultValue={this.state.data.iddiemxuatphat}
                 onChange={(value) => {
                   this.setState(prev => {
                     return {
                       ...prev,
                       data: {
                         ...prev.data,
-                        diemxuatphat: value
+                        iddiemxuatphat: value
                       }
                     }
                   })
                 }}
-                selectOption={(value) => {
-                  this.setState(prev => {
-                    return {
-                      ...prev,
-                      data: {
-                        ...prev.data,
-                        tinhxuatphat: codeByValue(value, this.state.diemxuatphat)
-                      }
-                    }
-                  })
-                }}
-              />
-              <CustomSelect
-                value={this.state.data.tinhxuatphat}
-                handleChange={value => {
-                  this.setState(prev => {
-                    return {
-                      ...prev,
-                      data: {
-                        ...prev.data,
-                        tinhxuatphat: value
-                      }
-                    }
-                  })
-                }}
-                selectOption={(value) => {
-                  let tmp = codeByValue(this.state.data.diemxuatphat, this.state.diemxuatphat)
-                  if(tmp !== undefined && tmp !== value){
-                    this.setState(prev => {
-                      return {
-                        ...prev,
-                        data: {
-                          ...prev.data,
-                          diemxuatphat: ''
-                        }
-                      }
-                    })
-                  }
-                }}
-              />
+              >
+                {diadiem}
+              </Select>
+              
             </Row>
             <Row style={{marginTop: 10}}>
               <b style={{fontSize: '0.6rem'}}>Điểm trả hàng: </b>
               <br/>
-              <CompleteInputPlace
-                isSmall={true}
-                value={this.state.data.diemtrahang}
-                option={this.state.diemtrahang}
+              <Select
+                mode="multiple"
+                style={{ width: '100%' }}
+                placeholder="Chọn địa điểm"
+                defaultValue={this.state.data.iddiemtrahang}
+                filterOption={(input, option) => slugify(option.props.children).indexOf(slugify(input.toLowerCase())) >= 0}
+                // defaultValue={['a10', 'c12']}
                 onChange={(value) => {
                   this.setState(prev => {
                     return {
                       ...prev,
                       data: {
                         ...prev.data,
-                        diemtrahang: value
+                        iddiemtrahang: value
                       }
                     }
                   })
                 }}
-                selectOption={(value) => {
-                  this.setState(prev => {
-                    return {
-                      ...prev,
-                      data: {
-                        ...prev.data,
-                        tinhtrahang: codeByValue(value, this.state.diemtrahang)
-                      }
-                    }
-                  })
-        
-                }
-                }
-              />
-              <CustomSelect
-                value={this.state.data.tinhtrahang}
-                handleChange={value => {
-                  this.setState(prev => {
-                    return {
-                      ...prev,
-                      data: {
-                        ...prev.data,
-                        tinhtrahang: value
-                      }
-                    }
-                  })
-                }}
-                selectOption={(value) => {
-                  let tmp = codeByValue(this.state.data.diemtrahang, this.state.diemtrahang)
-                  if(tmp !== undefined && tmp !== value){
-                    this.setState(prev => {
-                      return {
-                        ...prev,
-                        data: {
-                          ...prev.data,
-                          diemtrahang: ''
-                        }
-                      }
-                    })
-                  }
-                }}
-              />
+              >
+                {diadiem}
+              </Select>
+              
             </Row>
             <Row style={{marginTop: 10}}>
     
@@ -353,39 +314,6 @@ class DOPage extends React.Component {
                              }}
                 />
               </Col>
-    
-              <Col span={12}>
-                <b style={{fontSize: '0.6rem'}}> Số điểm trả hàng: </b>
-                <InputNumber style={{width: '100%'}} size="large"
-                             value={this.state.data.sodiem}
-                             min={1} max={100}
-                             onChange={(value) => {
-                               if(!isNaN(parseInt(value)) || value === '') {
-                                 this.setState(prev => {
-                                   return {
-                                     ...prev,
-                                     data: {
-                                       ...prev.data,
-                                       sodiem: value
-                                     }
-                                   }
-                                 })
-                               } else {
-                                 this.setState(prev => {
-                                   return {
-                                     ...prev,
-                                     data: {
-                                       ...prev.data,
-                                       sodiem: 1
-                                     }
-                                   }
-                                 })
-                               }
-                             }}
-                />
-              </Col>
-            </Row>
-            <Row style={{marginTop: 10}}>
               <Col span={12}>
                 <b style={{fontSize: '0.6rem'}}>Quãng đường(km):</b>
                 <InputNumber style={{width: '100%'}} size="large" min={1} max={1000}
@@ -415,96 +343,7 @@ class DOPage extends React.Component {
                              }}
                 />
               </Col>
-              <Col span={12}>
-                <b style={{fontSize: '0.6rem'}}> Tiền thu hộ: </b>
-                <InputNumber
-                  defaultValue={this.state.data.tienthu}
-                  min={0}
-                  formatter={value => `${value.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
-                  parser={value => value.replace(/(,*)/g, '')}
-                  style={{width: '100%'}}
-                  onChange={(value) => {
-                    if(parseInt(value).isNaN){
-                      value = 0;
-                    }
-                    this.setState(prev => {
-                      return {
-                        ...prev,
-                        data: {
-                          ...prev.data,
-                          tienthu: value
-                        }
-                      }
-                    })
-                  }}
-                />
-              </Col>
             </Row>
-  
-            {/*<Row style={{marginTop: 10}}>*/}
-              {/*<div style={{display: this.state.doixe ? 'block': 'none'}}>*/}
-                {/*<Row>*/}
-                  {/*<Col span={12}>*/}
-                    {/*Biển kiếm soát:*/}
-                    {/*<Input*/}
-                      {/*defaultValue={this.state.data.xe.bks}*/}
-                      {/*onChange={(e) => {*/}
-                        {/*let value = e.target.value*/}
-                        {/*this.setState(prev => {*/}
-                          {/*return {*/}
-                            {/*...prev,*/}
-                            {/*data: {*/}
-                              {/*...prev.data,*/}
-                              {/*xe: {*/}
-                                {/*...prev.data.xe,*/}
-                                {/*bks: value*/}
-                              {/*}*/}
-                            {/*}*/}
-                          {/*}*/}
-                        {/*})*/}
-                      {/*}}*/}
-                    {/*/>*/}
-                  {/*</Col>*/}
-            
-                  {/*<Col span={12}>*/}
-                    {/*Trọng tải:*/}
-                    {/*<InputNumber style={{width: '100%'}} size="large"*/}
-                                 {/*defaultValue={this.state.data.xe.trongtai}*/}
-                                 {/*min={1} max={100}*/}
-                                 {/*onChange={(value) => {*/}
-                                   {/*if(!isNaN(parseFloat(value)) || value === '') {*/}
-                                     {/*this.setState(prev => {*/}
-                                       {/*return {*/}
-                                         {/*...prev,*/}
-                                         {/*data: {*/}
-                                           {/*...prev.data,*/}
-                                           {/*xe: {*/}
-                                             {/*...prev.data.xe,*/}
-                                             {/*trongtai: value*/}
-                                           {/*}*/}
-                                         {/*}*/}
-                                       {/*}*/}
-                                     {/*})*/}
-                                   {/*} else {*/}
-                                     {/*this.setState(prev => {*/}
-                                       {/*return {*/}
-                                         {/*...prev,*/}
-                                         {/*data: {*/}
-                                           {/*...prev.data,*/}
-                                           {/*xe: {*/}
-                                             {/*...prev.data.xe,*/}
-                                             {/*trongtai: 1*/}
-                                           {/*}*/}
-                                         {/*}*/}
-                                       {/*}*/}
-                                     {/*})*/}
-                                   {/*}*/}
-                                 {/*}}*/}
-                    {/*/>*/}
-                  {/*</Col>*/}
-                {/*</Row>*/}
-              {/*</div>*/}
-            {/*</Row>*/}
   
             <Row style={{marginTop: 10}}>
               <b style={{fontSize: '0.6rem'}}> Tiền phát sinh: </b>
@@ -577,7 +416,7 @@ class DOPage extends React.Component {
               <div className="updateButton">
                 <Link to="/dieuhanh/danhsachdo">
                   <Button type="primary"
-                          style={{width: 200, height: 60, fontSize: 30}}
+                          style={{width: 200, height: 60, fontSize: 16}}
                   >Quay lại</Button>
                 </Link>
               </div>
@@ -614,6 +453,17 @@ function codeByValue(value, list){
   }
   return ''
 }
+
+function getIndexPlace(value, list){
+  
+  for(let i=0; i<list.length; i++){
+
+    if(list[i]._id === value._id){
+      return i + ''
+    }
+  }
+}
+
 
 function check(data){
   if(data.khachhang === undefined || data.khachhang.trim().length < 1){

@@ -54,7 +54,7 @@ class DOPage extends React.Component {
   }
 
   componentWillMount() {
-    agent.IT.danhsachThauPhu()
+    agent.DieuHanh.danhsachThauPhu()
       .then(res => {
         this.setState(prev => {return {
           ...prev,
@@ -70,7 +70,7 @@ class DOPage extends React.Component {
       <div className="home-page" style={{marginTop: '1rem'}}>
         <div style={{padding: '0.3em'}}>
             <div>
-              <h2 style={{textAlign: 'center', fontSize: '1.2rem'}}>Thêm xe</h2>
+              <h2 style={{textAlign: 'center', fontSize: '2rem'}}>Thêm xe</h2>
               <ThemXeForm />
             </div>
         </div>

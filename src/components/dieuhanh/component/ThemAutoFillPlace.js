@@ -15,10 +15,10 @@ class NormalLoginForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        agent.DieuHanh.themAutoFill({fieldname: this.props.fieldName, value: values.value, code: values.code})
+        agent.DieuHanh.themDiaDiem({name: values.name, code: values.code, tinh: {code: values.tinh.key, name: values.tinh.label}})
           .then(res => {
             message.success('Thêm thành công')
-            that.props.form.resetFields(['value'])
+            that.props.form.resetFields(['name', 'code'])
             // this.context.router.replace('/it');
           })
           .catch(err => {
@@ -34,9 +34,9 @@ class NormalLoginForm extends React.Component {
         <div className="groupWr">
           <h3 className="header">{this.props.title}</h3>
           <Row>
-            <Col span={16}>
+            <Col span={8}>
               <FormItem>
-                {getFieldDecorator('value', {
+                {getFieldDecorator('name', {
                   rules: [{ required: true, message: 'Không được để trống' }],
                   // initialValue: this.props.defaultValue.username
                 })(
@@ -44,17 +44,33 @@ class NormalLoginForm extends React.Component {
                 )}
               </FormItem>
             </Col>
+  
             <Col span={8} style={{paddingLeft: 10}}>
               <FormItem>
                 {getFieldDecorator('code', {
+                  rules: [{ required: true, message: 'Không được để trống' }],
                   // initialValue: this.props.defaultValue.username
                 })(
-                  <CustomSelect handleChange={value => {
-                    this.props.form.setFieldsValue({code: value})
+                  <Input prefix={<Icon type="edit" style={{ fontSize: 13 }} />} placeholder="" />
+                )}
+              </FormItem>
+            </Col>
+            
+            
+            <Col span={8} style={{paddingLeft: 10}}>
+              <FormItem>
+                {getFieldDecorator('tinh', {
+                  // initialValue: this.props.defaultValue.username
+                })(
+                  <CustomSelect handleChange={option => {
+                    // console.log(key, label)
+                    let values = option
+                    this.props.form.setFieldsValue({tinh: values})
                   }} />
                 )}
               </FormItem>
             </Col>
+            
             <Col span={24} style={{paddingLeft: 10}}>
               <FormItem>
                 <Button type="primary" htmlType="submit" className="login-form-button">
@@ -62,6 +78,7 @@ class NormalLoginForm extends React.Component {
                 </Button>
               </FormItem>
             </Col>
+           
           </Row>
         </div>
         

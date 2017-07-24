@@ -10,10 +10,10 @@ class NormalLoginForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        agent.IT.themXe(values)
+        agent.DieuHanh.themXe(values)
           .then(res => {
             message.success('Them thanh cong')
-            this.context.router.replace('/it');
+            this.context.router.replace('/dieuhanh');
           })
           .catch(err => {
             message.error('Them that bai')
@@ -56,7 +56,7 @@ class NormalLoginForm extends React.Component {
           </FormItem>
         </div>
         <FormItem>
-          <Button type="primary" htmlType="submit" className="login-form-button" style={{width: 280, height: 60, fontSize: 40}}>
+          <Button type="primary" htmlType="submit" className="login-form-button" >
             Thêm xe mới
           </Button>
         </FormItem>

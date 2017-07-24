@@ -69,68 +69,63 @@ class Component extends React.Component {
               </div>
               <div style={{marginTop: '2em'}}>
                 
-                <Row className="mt10 textCenter">
-                  <SegmentedControl
-                    style={{height: '1.5rem', fontSize: '2rem !important'}}
-                    selectedIndex={this.state.selectedIndex}
-                    values={['Điều hành', 'IT']}
-                    onValueChange={(value) => {
-                      let index = 0;
-                      let type = 'dieuhanh'
-                      if(value === 'Điều hành'){
-                        index = 0
-                        type = 'dieuhanh'
-                      } else if (value === 'IT'){
-                        index = 1
-                        type = 'it'
-                      }
-                      this.setState(prev => { return {
-                        ...prev,
-                        selectedIndex: index,
-                        type: type
-                      }})
-                      
-                    }}
-                  />
-                </Row>
+                {/*<Row className="mt10 textCenter">*/}
+                  {/*<SegmentedControl*/}
+                    {/*style={{height: '1.5rem', fontSize: '2rem !important'}}*/}
+                    {/*selectedIndex={this.state.selectedIndex}*/}
+                    {/*values={['Điều hành', 'IT']}*/}
+                    {/*onValueChange={(value) => {*/}
+                      {/*let index = 0;*/}
+                      {/*let type = 'dieuhanh'*/}
+                      {/*if(value === 'Điều hành'){*/}
+                        {/*index = 0*/}
+                        {/*type = 'dieuhanh'*/}
+                      {/*} else if (value === 'IT'){*/}
+                        {/*index = 1*/}
+                        {/*type = 'it'*/}
+                      {/*}*/}
+                      {/*this.setState(prev => { return {*/}
+                        {/*...prev,*/}
+                        {/*selectedIndex: index,*/}
+                        {/*type: type*/}
+                      {/*}})*/}
+                      {/**/}
+                    {/*}}*/}
+                  {/*/>*/}
+                {/*</Row>*/}
                 
-                <List>
-                  <InputItem
-                    // placeholder="Hello World"
-                    type="text"
-                    value={this.state.username}
-                    onFocus={(value) => {
-                      if(value === ' '){
-                        this.setState(prev => {return {
-                          ...prev,
-                          username: ''
-                        }})
-                      }
+                Tài khoản:
+                <Input
+                  placeholder="Hello World"
+    
+                  value={this.state.username}
+    
+                  onChange={(env) => {
+                    let value = env.target.value
+                    this.setState(prev => {return {
+                      ...prev,
+                      username: value.toLowerCase()
+                    }})
+                  }}
+                />
   
-                    }}
-                    onChange={(value) => {
-                      this.setState(prev => {return {
-                        ...prev,
-                        username: value.toLowerCase()
-                      }})
-                    }}
-                  >Tài khoản: </InputItem>
-                  <InputItem
+                Mật khẩu:
+                  <Input
                     // placeholder="please input content"
                     // data-seed="logId"
                     type="password"
-                    onChange={(value) => {
+                    onChange={(env) => {
+                      let value = env.target.value
                       this.setState(prev => {return {
                         ...prev,
                         password: value
                       }})
                     }}
-                  >Mật khẩu: </InputItem>
-                </List>
+                  />
                 
                 <Row className="mt10">
                   <Button
-                    style={{height: '2rem', width: '100%', fontSize: '0.8rem'}}
+                    style={{height: '2rem',fontSize: '0.8rem'}}
                     type="primary"
                     disabled={this.props.inProgress}
                     onClick={() => {

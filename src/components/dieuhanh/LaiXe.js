@@ -82,7 +82,7 @@ class DOPage extends React.Component {
           )}
           {this.state.init && (
             <div>
-              <h2 style={{textAlign: 'center', fontSize: '1.2rem'}}>Thêm lái xe</h2>
+              <h2 style={{textAlign: 'center', fontSize: '2rem'}}>Thêm lái xe</h2>
               <ThemLaiXeForm
                 thauphu={this.state.thauphu}
                 xe={this.state.xe}
