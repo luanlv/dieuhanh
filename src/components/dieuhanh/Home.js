@@ -7,6 +7,7 @@ import {
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER
 } from '../../constants/actionTypes';
+import Avatar from '../_components/Avatar'
 
 import {Button, Row} from 'antd'
 import { Flex, WingBlank } from 'antd-mobile';
@@ -57,6 +58,7 @@ class Home extends React.Component {
           <Link to="/dieuhanh/themthongtin">
             <Button size={"large"} className="btn" type="primary" style={{width: '100%', marginTop: '0.3rem', height: '3rem', fontSize: '1rem'}}>Thêm thông tin</Button>
           </Link>
+          
         </div>
       </div>
     );

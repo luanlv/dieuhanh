@@ -21,16 +21,25 @@ html, body {
     /*line-height: 0.6rem !important;*/
 }
 
-.ant-row input {
-    /*height: 1rem !important;*/
-    /*font-size: 0.6rem !important;*/
+.ant-upload-select-picture-card i {
+    font-size: 28px;
+    color: #999;
 }
 
-/*.error-messages {*/
-    /*text-align: center;*/
-    /*width: 100%;*/
-    /*color: red;*/
-/*}*/
+.ant-upload-select-picture-card .ant-upload-text {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #666;
+}
+
+.ant-upload-select {
+    /*width: 100% !important;*/
+}
+
+.ant-upload-list-item {
+    margin: 0 auto !important;
+}
+
 
 .ant-modal .bks {
     color: red;

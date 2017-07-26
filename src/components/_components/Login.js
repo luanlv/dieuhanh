@@ -38,7 +38,7 @@ class Component extends React.Component {
     this.state={
       selectedIndex: 0,
       type: 'dieuhanh',
-      username: ' ',
+      username: '',
       password: '',
     }
 
@@ -96,7 +96,6 @@ class Component extends React.Component {
                 
                 Tài khoản:
                 <Input
-                  placeholder="Hello World"
     
                   value={this.state.username}
     

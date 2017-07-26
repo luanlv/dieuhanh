@@ -28,6 +28,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onUnload: () =>
     dispatch({  type: HOME_PAGE_UNLOADED }),
+  
 
   onLoad: ( payload) =>
     dispatch({ type: LAIXE_DO_LOADED, payload }),
