@@ -52,7 +52,9 @@ class Home extends React.Component {
           <Link to="/dieuhanh/themdo">
             <Button size={"large"} className="btn" type="primary" style={{backgroundColor: 'grey !important' ,width: '100%', height: '3rem', fontSize: '1rem'}}>Thêm lệnh mới</Button>
           </Link>
-        
+          <Link to="/dieuhanh/dochuaphancong">
+            <Button size={"large"} className="btn" type="primary" style={{width: '100%', marginTop: '0.3rem', height: '3rem', fontSize: '1rem'}}>Lệnh chưa phân công</Button>
+          </Link>
           <Link to="/dieuhanh/danhsachdo">
             <Button size={"large"} className="btn" type="primary" style={{width: '100%', marginTop: '0.3rem', height: '3rem', fontSize: '1rem'}}>Danh sách</Button>
           </Link>

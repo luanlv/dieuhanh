@@ -186,9 +186,12 @@ class DOPage extends React.Component {
   
               <Select
                 // mode="multiple"
+                showSearch
                 style={{ width: '100%' }}
                 placeholder="Chọn địa điểm"
-                filterOption={(input, option) => slugify(option.props.children).indexOf(slugify(input.toLowerCase())) >= 0}
+                filterOption={(input, option) => {
+                  return slugify(option.props.children.toLowerCase()).indexOf(slugify(input.toLowerCase())) >= 0}
+                }
                 // defaultValue={['a10', 'c12']}
                 onChange={(value) => {
                   this.setState(prev => {
@@ -466,10 +469,10 @@ function codeByValue(value, list){
 }
 
 function check(data){
-  if(data.laixe === undefined){
-    message.error("Chưa chọn lai xe")
-    return false
-  }
+  // if(data.laixe === undefined){
+  //   message.error("Chưa chọn lai xe")
+  //   return false
+  // }
   if(data.khachhang === undefined || data.khachhang.trim().length < 1){
     message.error("Khách hàng không được để trống")
     return false

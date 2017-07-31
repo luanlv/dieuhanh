@@ -38,6 +38,7 @@ import DieuHanhPhuPhi from './components/dieuhanh/ListPhuPhi';
 import DieuHanhEditDO from './components/dieuhanh/EditDO';
 import DieuHanhEditPhuPhi from './components/dieuhanh/EditPhuPhi';
 import DieuHanhListDO from './components/dieuhanh/ListDO';
+import DieuHanhListDOChuaPhanCong from './components/dieuhanh/ListDOPending';
 import DieuHanhThemAutoFill from './components/dieuhanh/AutoFill';
 import DieuHanhThemLaiXe from './components/dieuhanh/LaiXe';
 import DieuHanhThemXe from './components/dieuhanh/Xe';
@@ -80,6 +81,7 @@ ReactDOM.render((
           <Route path="dieuhanh" component={HomeDieuHanh} />
           <Route path="dieuhanh/do" component={DieuHanhDOMenu} />
           <Route path="dieuhanh/danhsachdo" component={DieuHanhListDO} />
+          <Route path="dieuhanh/dochuaphancong" component={DieuHanhListDOChuaPhanCong} />
           <Route path="dieuhanh/themdo" component={DieuHanhThemDO} />
           <Route path="dieuhanh/do/:id" component={DieuHanhEditDO} />
           <Route path="dieuhanh/phuphi" component={DieuHanhPhuPhi} />

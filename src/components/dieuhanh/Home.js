@@ -45,10 +45,11 @@ class Home extends React.Component {
           <Link to="/dieuhanh/do">
             <Button size={"large"} className="btn" type="primary" style={{width: '100%', height: '3rem', fontSize: '1rem'}}>Lệnh điều xe</Button>
           </Link>
-
-          <Link to="/dieuhanh/phuphi">
-            <Button size={"large"} className="btn" type="primary" style={{width: '100%', marginTop: '0.3rem', height: '3rem', fontSize: '1rem'}}>Phụ phí</Button>
-          </Link>
+          
+          {/*<Link to="/dieuhanh/phuphi">*/}
+            {/*<Button size={"large"} className="btn" type="primary" style={{width: '100%', marginTop: '0.3rem', height: '3rem', fontSize: '1rem'}}>Phụ phí</Button>*/}
+          {/*</Link>*/}
+          
           <Link to="/dieuhanh/themlaixe">
             <Button size={"large"} className="btn" type="primary" style={{width: '100%', marginTop: '0.3rem', height: '3rem', fontSize: '1rem'}}>Thêm lái xe</Button>
           </Link>

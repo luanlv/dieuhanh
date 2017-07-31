@@ -279,6 +279,12 @@ textarea.ant-input {
     text-align: left
 }
 
+.listDO {
+    border: 2px solid #333;
+    border-radius: 5px;
+    padding: 5px;
+}
+
 @media screen and (max-width: 47.9375em) {
     .responsiveTable {
         /* Force table elements to not behave like tables anymore */

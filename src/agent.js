@@ -137,6 +137,8 @@ const IT = {
 const DieuHanh = {
   listDOchuaxacnhan: () =>
     requests.get('/dieuhanh/do/chuaxacnhan'),
+  listDOchuaphancong: () =>
+    requests.get('/dieuhanh/do/chuaphancong'),
   duyet: (id, action) =>
     requests.post('/dieuhanh/do/duyet', {id: id, action: action}),
   duyetphuphi: (id, action) =>
@@ -149,6 +151,8 @@ const DieuHanh = {
     requests.get(`/dieuhanh/autofill/allPlace`),
   capnhapDO: data =>
     requests.post('/dieuhanh/do/capnhap', {data}),
+  chonlaixe: data =>
+    requests.post('/dieuhanh/do/chonlaixe', {data}),
   listPhuPhi: () =>
     requests.get(`/dieuhanh/phuphi/chuaxacnhan`),
   PhuPhibyId: (id) =>

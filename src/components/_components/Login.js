@@ -69,30 +69,30 @@ class Component extends React.Component {
               </div>
               <div style={{marginTop: '2em'}}>
                 
-                {/*<Row className="mt10 textCenter">*/}
-                  {/*<SegmentedControl*/}
-                    {/*style={{height: '1.5rem', fontSize: '2rem !important'}}*/}
-                    {/*selectedIndex={this.state.selectedIndex}*/}
-                    {/*values={['Điều hành', 'IT']}*/}
-                    {/*onValueChange={(value) => {*/}
-                      {/*let index = 0;*/}
-                      {/*let type = 'dieuhanh'*/}
-                      {/*if(value === 'Điều hành'){*/}
-                        {/*index = 0*/}
-                        {/*type = 'dieuhanh'*/}
-                      {/*} else if (value === 'IT'){*/}
-                        {/*index = 1*/}
-                        {/*type = 'it'*/}
-                      {/*}*/}
-                      {/*this.setState(prev => { return {*/}
-                        {/*...prev,*/}
-                        {/*selectedIndex: index,*/}
-                        {/*type: type*/}
-                      {/*}})*/}
-                      {/**/}
-                    {/*}}*/}
-                  {/*/>*/}
-                {/*</Row>*/}
+                <Row className="mt10 textCenter">
+                  <SegmentedControl
+                    style={{height: '1.5rem', fontSize: '2rem !important'}}
+                    selectedIndex={this.state.selectedIndex}
+                    values={['Điều hành', 'IT']}
+                    onValueChange={(value) => {
+                      let index = 0;
+                      let type = 'dieuhanh'
+                      if(value === 'Điều hành'){
+                        index = 0
+                        type = 'dieuhanh'
+                      } else if (value === 'IT'){
+                        index = 1
+                        type = 'it'
+                      }
+                      this.setState(prev => { return {
+                        ...prev,
+                        selectedIndex: index,
+                        type: type
+                      }})
+                      
+                    }}
+                  />
+                </Row>
                 
                 Tài khoản:
                 <Input
